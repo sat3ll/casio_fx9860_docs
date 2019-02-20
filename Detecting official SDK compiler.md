@@ -17,9 +17,9 @@ From this information, one can write code that can be compiled either with
 GCC or SHC (Casio Official SDK).  
 Example:
 ```
-#ifdef __HITACHI__
+if defined(__HITACHI__) && !defined(__GNUC__)
 /* code for official sdk here */
-#else
+#elif defined(__GNUC__)
 /* code for gcc here */
 #endif
 ```
