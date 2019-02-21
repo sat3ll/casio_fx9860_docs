@@ -133,7 +133,7 @@ cp build/g1a-wrapper $PREFIX/bin
 
 According to
 https://web.archive.org/web/20110112033531/https://sourceforge.net/apps/trac/fxsdk/wiki/UsingGCC, the following scripts and code are supposed to mimic the
-official SDK behavior. (Article uses *sh3eb-elf* as TARGET).  
+official SDK behavior.  
 An example project containing all the following files can be obtained from:
 http://www.planet-casio.com/files/forums/projet-142401.zip or if you're just
 interested in the linker and crt0.s files they can be found below:
@@ -370,17 +370,19 @@ To compile your project:
 $ sh3eb-elf-gcc -m3 -mb -mrenesas -ffreestanding -nostdlib -T addin.ld crt0.s addin.c -o addin.elf -I include -lgcc -L . -lfx -O2
 ```
 
-Options of Interest:
-|GCC Toggle | Effect |
-|-----------|--------|
-| -O9 | Enables full optimizations|
-| -m3 | Generate code for SH3 |
-| -mb | Generate big-endian code |
-| -mrenesas | Produce code compatible with fxlib |
-| -ffreestanding | Do not assume existence of stdlib |
-| -nostdlib | stdlib is contained within fxlib |
-| -lgcc | Link against libgcc (required!) |
-| -lfx | Link against fxlib |
+Options of Interest:  
+
+| GCC Toggle     | Effect                             |
+| -------------- | ---------------------------------- |
+| -O9            | Enables full optimizations         |
+| -m3            | Generate code for SH3              |
+| -mb            | Generate big-endian code           |
+| -mrenesas      | Produce code compatible with fxlib |
+| -ffreestanding | Do not assume existence of stdlib  |
+| -nostdlib      | stdlib is contained within fxlib   |
+| -lgcc          | Link against libgcc (required!)    |
+| -lfx           | Link against fxlib                 |
+
 
 After compilation, an ELF file is obtained. We need it in binary. Therefore:  
 ```
