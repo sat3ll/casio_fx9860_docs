@@ -352,13 +352,21 @@ Place both these files in the project directory.
 You will also need *libfx.a* and *dispbios.h, endian.h, filebios.h, fxlib.h,
 keybios.h* and *timer.h*.  
   - *libfx.a* can be obtained from the archive above.  
-  How this file was generated I don't know, my suspicions lay on the
-  *fx9860G_library.lib* found in
+  This file can be created either by using *sh-elf-convrenesaslib* which is
+  included with prebuilt GCC toolchains from
+  https://gcc-renesas.com/sh/download-latest-toolchains/ or
+  by manual extraction of modules from *fx9860G_library.lib*.
+  Extracting them manually only involves using *optlnk.exe* from SHC already
+  included with the official Casio SDK.
+  (Found at `C:\Program Files\CASIO\fx-9860G SDK\OS\SH\BIN\`).  
+  *fx9860G_library.lib* can found in
   `C:\Program Files\CASIO\fx-9860G SDK\OS\FX\lib\` directory.  
-  *.lib* files are the Microsoft equivalent of GCC *.a* static libraries.  
-  There was no *.c* source files provided with the SDK so it seems likely that
-  the contents from *libfx.a* came from *fx9860G_library.lib*.  
-  https://code.google.com/archive/p/lib2a/ might offer some leads.
+  Listing of the modules can be done with
+  `optlnk -FO=library -LIB=fx9860G_library -LIS=fx9860_library.lst`
+  and extracting them with
+  `optlnk -FO=library -LIB=fx9860G_library -LIS=fx9860_library.lst
+  -OU=%module%.obj -EXT=%module%`, where `%module%` is the function name listed
+  in the *fx9860_library.lst* (extract them individually).
   - *dispbios.h, endian.h, filebios.h, fxlib.h,
   keybios.h* and *timer.h* can be found in the archive or at
   `C:\Program Files\CASIO\fx-9860G SDK\OS\FX\include\`.
@@ -405,3 +413,5 @@ This generates *addin.g1a* that can be installed by the calculator.
   - https://www.nongnu.org/avr-libc/user-manual/install_tools.html
   - https://wiki.gentoo.org/wiki/Embedded_Handbook/General/Creating_a_cross-compiler
   - https://gcc.gnu.org/onlinedocs/gcc/SH-Options.html#SH-Options
+  - Extracting modules from .lib
+    - http://www.casiopeia.net/forum/viewtopic.php?t=1472
